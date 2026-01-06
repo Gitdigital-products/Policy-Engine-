@@ -21,4 +21,47 @@ A Rules-as-Code engine for eligibility, compliance logic, and thresholds evaluat
 ```bash
 pip install gitdigital-policy-engine
 ```
-# Policy-Engine-
+
+From source
+
+```bash
+git clone https://github.com/gitdigital/policy-engine.git
+cd policy-engine
+pip install -e .
+``
+
+Using Docker
+
+```bash
+docker-compose up
+```
+
+Quick Start
+
+1. Define a Policy
+
+Create a policy file policy.yaml:
+
+```yaml
+id: student-loan-eligibility
+name: Student Loan Eligibility
+version: "1.0.0"
+rule_sets:
+  basic:
+    id: basic
+    name: Basic Eligibility
+    rules:
+      - id: age-requirement
+        name: Age Requirement
+        condition:
+          operator: gte
+          left_operand: $age
+          right_operand: 18
+```
+
+
+
+
+
+
+
