@@ -1,0 +1,4 @@
+FROM ollama/ollama
+COPY . /app
+WORKDIR /app
+CMD ["sh", "scripts/run.sh"]
