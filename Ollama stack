@@ -1,0 +1,5 @@
+name: ollama-stack
+models:
+  - name: mistral
+    modelfile: ./modelfile/Modelfile
+entrypoint: scripts/run.sh
