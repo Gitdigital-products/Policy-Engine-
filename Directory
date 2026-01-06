@@ -1,0 +1,53 @@
+gitdigital-policy-engine/
+├── README.md
+├── pyproject.toml
+├── setup.py
+├── src/
+│   └── gitdigital/
+│       ├── __init__.py
+│       ├── engine/
+│       │   ├── __init__.py
+│       │   ├── core.py
+│       │   ├── compiler.py
+│       │   ├── evaluator.py
+│       │   ├── validator.py
+│       │   └── rule_parser.py
+│       ├── models/
+│       │   ├── __init__.py
+│       │   ├── rule.py
+│       │   ├── fact.py
+│       │   ├── decision.py
+│       │   └── policy.py
+│       ├── language/
+│       │   ├── __init__.py
+│       │   ├── dsl.py
+│       │   ├── syntax.py
+│       │   └── compiler.py
+│       ├── adapters/
+│       │   ├── __init__.py
+│       │   ├── json_adapter.py
+│       │   ├── yaml_adapter.py
+│       │   └── api_adapter.py
+│       ├── utils/
+│       │   ├── __init__.py
+│       │   ├── logger.py
+│       │   ├── cache.py
+│       │   └── helpers.py
+│       └── cli/
+│           ├── __init__.py
+│           └── main.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_engine.py
+│   ├── test_rules.py
+│   └── test_integration.py
+├── examples/
+│   ├── basic_policy.json
+│   ├── eligibility_rules.yaml
+│   ├── compliance_check.py
+│   └── thresholds_example.py
+├── docs/
+│   ├── getting-started.md
+│   ├── api-reference.md
+│   └── rule-language-spec.md
+└── docker-compose.yml
