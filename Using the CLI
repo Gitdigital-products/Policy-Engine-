@@ -1,0 +1,162 @@
+# Evaluate policy
+gitdigital-engine evaluate policy.yaml applicant.json
+
+# Validate policy
+gitdigital-engine validate policy.yaml
+
+# Create example policy
+gitdigital-engine create eligibility --output example_policy.json
+```
+
+Rule Language
+
+Conditions
+
+Conditions support various operators:
+
+```json
+{
+  "operator": "and",
+  "left_operand": [
+    {
+      "operator": "gte",
+      "left_operand": "$age",
+      "right_operand": 18
+    },
+    {
+      "operator": "lt",
+      "left_operand": "$income",
+      "right_operand": 100000
+    }
+  ]
+}
+```
+
+Thresholds
+
+Define and check thresholds:
+
+```python
+thresholds = {
+    "income": {"max": 75000, "warning": 65000},
+    "age": {"min": 18, "max": 65}
+}
+
+results = engine.check_thresholds("rule-set-id", values, thresholds)
+```
+
+API Reference
+
+REST API
+
+Start the API server:
+
+```bash
+uvicorn gitdigital.api.main:app --reload
+```
+
+Available endpoints:
+
+· POST /api/v1/policies - Load a policy
+· GET /api/v1/policies/{policy_id} - Get policy details
+· POST /api/v1/policies/{policy_id}/evaluate - Evaluate eligibility
+· POST /api/v1/compliance/check - Check compliance
+
+Python API
+
+```python
+from gitdigital import PolicyEngine, PolicyDSL
+
+# Create engine
+engine = PolicyEngine(mode="strict", cache_enabled=True)
+
+# Load policy
+policy = engine.load_policy(policy_data, format="json")
+
+# Evaluate
+decision = engine.evaluate_eligibility(policy_id, applicant_data)
+
+# Check thresholds
+threshold_results = engine.check_thresholds(
+    rule_set_id, 
+    values, 
+    thresholds
+)
+```
+
+Examples
+
+See the examples/ directory for:
+
+1. Basic Policy - Simple eligibility rules
+2. Compliance Rules - Regulatory compliance logic
+3. Threshold Management - Numeric threshold checking
+4. DSL Example - Using Python DSL for policy definition
+
+Development
+
+Running Tests
+
+```bash
+pytest tests/ --cov=gitdigital --cov-report=html
+```
+
+Code Formatting
+
+```bash
+black src/
+flake8 src/
+mypy src/
+```
+
+Building Documentation
+
+```bash
+mkdocs build
+mkdocs serve
+```
+
+Architecture
+```
+The engine follows a modular architecture:
+
+1. Core Engine - Main evaluation logic
+2. Rule Models - Data structures for rules and conditions
+3. Evaluator - Rule evaluation and execution
+4. DSL - Domain-specific language for policy definition
+5. Adapters - Input/output adapters for different formats
+6. API Layer - REST and CLI interfaces
+
+Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for your changes
+4. Submit a pull request
+
+License
+
+MIT License - see LICENSE file for details
+
+Support
+
+· Documentation: https://gitdigital.github.io/policy-engine
+· Issues: GitHub Issues
+· Email: support@gitdigital.ai
+
+
+
+## Key Features Implemented:
+
+1. **Rules-as-Code Engine**: Complete rule evaluation system
+2. **Eligibility Logic**: Multi-criteria eligibility determination
+3. **Compliance Checking**: Rule-based compliance evaluation
+4. **Threshold Management**: Built-in threshold validation
+5. **Domain-Specific Language**: Python DSL for policy definition
+6. **Multiple Formats**: JSON, YAML, and programmatic APIs
+7. **Caching**: Performance optimization
+8. **CLI Interface**: Command-line tool
+9. **Docker Support**: Containerized deployment
+10. **Comprehensive Models**: Pydantic models for type safety
+11. **Extensible**: Custom operators and rule types
+12. **Audit Trail**: Decision logging and traceability
